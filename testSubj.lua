@@ -21,7 +21,7 @@ entity = tostring(math.random(99999))
 
 local dg = string.format("%s %s %d %d",entity, "at",320,240)
 udp:send(dg)
-
+	
 t=0
 --..............
 
@@ -31,15 +31,31 @@ function SendMessage()
 			--compiling message
 			io.write("What's your number: ")
 			local number = io.read()
-			local dg = string.format("%s %s %d %d",entity,"move",number,number)
-			--.................
+			if((number)=="show") then
+				
+					local dg = string.format("%s %s %d %d",entity,"show",0,0)
+					udp:send(dg)
+			
+			elseif(number=="change") then
+				io.write("Give entity number: ")
+				local ent1 = io.read()
 
-			--sending message
-			udp:send(dg)
-			--...............
+				entity = ent1
+
+			else
+				
+				local dg = string.format("%s %s %d %d",entity,"move",number,number)
+				--.................
+
+				--sending message
+				udp:send(dg)
+				--...............
+			end
+			
 		end
 
 
 end
 
 SendMessage()
+
